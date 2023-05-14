@@ -2,28 +2,45 @@ import QueryString, { ParsedQs } from "qs";
 import { Sort } from "mongodb";
 import ExpressError from "./ExpressError";
 
-const convertToMovieField = (field: string) => {
-  switch (field) {
+/*Sorting */
+/******************************************************************* */
+/**
+
+    Auxiliary function to convert query string parameters to keys of the class "movie" compatible with those in the database.
+    @param {string} key - The key to be converted. ("title", "rating", "year", "runtime")
+    @returns {string|null} - The converted key or null if the parameter key is not recognized.
+    */
+export const convertToMovieKey = (key: string): string | null => {
+  switch (key) {
     case "title":
       return "primaryTitle";
-    default:
     case "rating":
       return "averageRating";
     case "year":
       return "startYear";
     case "runtime":
       return "runtimeMinutes";
+    default:
       return null;
   }
 };
-export const getSortingProperties = (query: QueryString.ParsedQs) => {
+/**
+
+    Retrieves the sorting properties based on the provided query string parameters.
+    If the query string is empty, the default sorting properties for trending sort are returned.
+    @param {QueryString.ParsedQs} query - The parsed query string parameters.
+    @returns {Sort} - The sorting properties object. Default sorting properties: { startYear: -1, numVotes: -1 }.
+    @throws {ExpressError} - If an invalid field is provided.
+    */
+export const getSortingProperties = (query: QueryString.ParsedQs): Sort => {
   let sort: Sort = { startYear: -1, numVotes: -1 }; //Trending sort
   if (typeof query.sort_by === "string") {
-    const field = convertToMovieField(
-      query.sort_by.split("(")[1].split(")")[0]
-    );
+    const field = convertToMovieKey(query.sort_by.split("(")[1].split(")")[0]);
     const direction = query.sort_by.split("(")[0];
     if (!field) {
+      throw new ExpressError("Invalid field", 400);
+    }
+    if (direction !== "asc" && direction !== "desc") {
       throw new ExpressError("Invalid field", 400);
     }
     const order = direction === "asc" ? 1 : -1;
@@ -32,6 +49,7 @@ export const getSortingProperties = (query: QueryString.ParsedQs) => {
   }
   return sort;
 };
+/******************************************************************* */
 export const getPaginationProperties = (query: QueryString.ParsedQs) => {
   const paginationProps = { page: 1, limit: 10 }; //default values
   if (typeof query.page === "string") {
@@ -73,7 +91,7 @@ export const convertToFilter = (query: QueryString.ParsedQs) => {
   return filter;
 };
 
-const convertToMongoFilterRule = (queryCriteria: any) => {
+export const convertToMongoFilterRule = (queryCriteria: any) => {
   type parsedCriteria = {
     $eq?: number | null;
     $gt?: number | null;
