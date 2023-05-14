@@ -24,7 +24,14 @@ let moviesCollection: Collection;
 connectToDatabase()
   .then((movies) => {
     moviesCollection = movies;
+    //Text Index Init
+    //this process should be done in the initial setup,
+    //but since the database is read-only, i only had to it once
+    // moviesCollection.createIndex({ primaryTitle: "text" }).then(() => {
+    //  console.log("indexing finished");
+    // });
   })
+
   .catch((err) => {
     console.log("connection error");
     console.log(err);
@@ -35,6 +42,7 @@ connectToDatabase()
 const app = express();
 app.use(express.urlencoded({ extended: true })); //to parse req.body
 //*********************************************
+
 //****************************************************************************
 // Routing
 //                 Route                                      ---> Name
@@ -43,17 +51,53 @@ app.use(express.urlencoded({ extended: true })); //to parse req.body
 // GET /movies/:id - Get one movie (using ID)                 ---> Show
 
 //*****************************************************************************
+import {
+  convertToFilter,
+  getPaginationProperties,
+  getSortingProperties,
+  getFilterByRuntimeAndRating,
+} from "./utils/movieDataUtils";
 
 app.get(
   "/",
   catchAsync(async (_req: Request, res: Response) => {
-    // const movies = (await collections.movies?.find({}).toArray()) as Movie[];
-    const movie = (await moviesCollection.findOne({
-      originalTitle: "Apocalypse Now",
-    })) as Movie;
-    console.log(movie);
+    const queryObject = _req.query;
 
-    res.status(200).send(movie);
+    //to do: process and runtime and rating from queryObject
+
+    const { limit, page } = getPaginationProperties(queryObject);
+
+    const mainFilter = convertToFilter(queryObject);
+    const runtimeAndRatingFilter = getFilterByRuntimeAndRating(queryObject);
+    const filter = { ...mainFilter, ...runtimeAndRatingFilter };
+
+    const sort = getSortingProperties(queryObject);
+    const skip = (page - 1) * limit;
+
+    const cursor = moviesCollection
+      .find(filter)
+      .sort(sort)
+      .limit(limit)
+      .skip(skip);
+
+    const result = (await cursor.toArray()) as Movie[];
+    const previousPage = page === 1 ? null : page - 1;
+
+    res.status(200).send({
+      result,
+      previousPage,
+      currentPage: page,
+      nextPage: page + 1,
+      limit,
+    });
+
+    //Finding one movie
+    // const movie = (await moviesCollection.findOne({
+    //   originalTitle: "Apocalypse Now",
+    // })) as Movie;
+    // console.log(movie);
+
+    // res.status(200).send(movie);
   })
 );
 
@@ -68,7 +112,7 @@ app.all("*", (req, res, next) => {
 // ***********************************************************************
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   const { statusCode = 500, message = "Something went wrong" } = err;
-  res.status(statusCode).render("error", { err });
+  res.status(statusCode).json(message);
 });
 
 app.listen(process.env.PORT, () => {
