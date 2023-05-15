@@ -59,7 +59,7 @@ import {
 } from "./utils/movieDataUtils";
 
 app.get(
-  "/",
+  "/movies",
   catchAsync(async (_req: Request, res: Response) => {
     const queryObject = _req.query;
 
