@@ -1,6 +1,9 @@
+//types
+import { MovieFetchData } from "../types";
+//components
 import { TableRow } from "./TableRow.component";
 
-export const Table = () => {
+export const Table = ({ movies }: { movies: MovieFetchData[] }) => {
   return (
     <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -33,7 +36,9 @@ export const Table = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-              <TableRow />
+              {movies.map((movie) => (
+                <TableRow key={movie._id} {...movie} />
+              ))}
             </tbody>
           </table>
         </div>
