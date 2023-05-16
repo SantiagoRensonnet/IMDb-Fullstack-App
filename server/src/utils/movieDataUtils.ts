@@ -29,11 +29,13 @@ export const convertToMovieKey = (key: string): string | null => {
     Retrieves the sorting properties based on the provided query string parameters.
     If the query string is empty, the default sorting properties for trending sort are returned.
     @param {QueryString.ParsedQs} query - The parsed query string parameters.
-    @returns {Sort} - The sorting properties object. Default sorting properties: { startYear: -1, numVotes: -1 }.
+    @returns {Sort} - The sorting properties object. Default sorting properties: { rating: -1}.
     @throws {ExpressError} - If an invalid field is provided.
     */
 export const getSortingProperties = (query: QueryString.ParsedQs): Sort => {
-  let sort: Sort = { startYear: -1, numVotes: -1 }; //Trending sort
+  let sort: Sort = { averageRating: -1 }; //Top Rating Sort
+
+  // let sort: Sort = { startYear: -1, numVotes: -1 }; //Trending sort
   if (typeof query.sort_by === "string") {
     const field = convertToMovieKey(query.sort_by.split("(")[1].split(")")[0]);
     const direction = query.sort_by.split("(")[0];
@@ -51,7 +53,7 @@ export const getSortingProperties = (query: QueryString.ParsedQs): Sort => {
 };
 /******************************************************************* */
 export const getPaginationProperties = (query: QueryString.ParsedQs) => {
-  const paginationProps = { page: 1, limit: 10 }; //default values
+  const paginationProps = { page: 1, limit: 5 }; //default values
   if (typeof query.page === "string") {
     paginationProps.page = parseInt(query.page);
   }
@@ -78,7 +80,7 @@ export const convertToFilter = (query: QueryString.ParsedQs) => {
     startYear: { $lte: 2023 },
     primaryTitle: { $regex: /^[\x00-\x7F]*$/ }, //Exclude ASCII extended characters
     originalTitle: { $regex: /^[\x00-\x7F]*$/ },
-    numVotes: { $gt: 1000 },
+    numVotes: { $gt: 10000 },
   };
   if (typeof query.genre === "string") {
     filter.genres = { $in: [query.genre] };
