@@ -1,8 +1,9 @@
-import { ButtonArray } from "./components/ButtonArray.component";
-import { TableTitle } from "./components/TableTitle.component";
-import { GenreSelect } from "./components/GenreSelect.component";
-import { SearchBar } from "./components/SearchBar.component";
-import { Table } from "./components/Table.component";
+//libs
+import { useEffect } from "react";
+//components
+import { TableSection } from "./components/Table/TableSection.component";
+import { FilterSection } from "./components/FilterSection/FilterSection.component";
+
 function App() {
   // useEffect(() => {
   //   const urlWithProxy = "/movies";
@@ -13,20 +14,9 @@ function App() {
   // }, []);
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-stone-200 xl:px-4">
-      <section className="container sm:grid sm:grid-cols-2 sm:gap-4 px-4">
-        <section>
-          <TableTitle />
-          <ButtonArray />
-        </section>
-        <section className="sm:flex sm:flex-col sm:justify-end sm:gap-y-2">
-          <GenreSelect />
-          <SearchBar />
-        </section>
-      </section>
-      <section className="container flex flex-col mt-6 px-4">
-        <Table />
-      </section>
+    <main className="min-h-screen flex flex-col gap-6 items-center justify-center bg-stone-200 xl:px-4">
+      <FilterSection />
+      <TableSection />
     </main>
   );
 }
