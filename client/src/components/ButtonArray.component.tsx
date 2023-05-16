@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Button } from "./Button.component";
 import { SortOrderButton } from "./SortOrderButton.component";
 export const ButtonArray = () => {
-  const sortProperties = ["title", "rating", "year", "runtime"];
-  const [activeBtn, setActiveBtn] = useState("title");
+  const sortProperties = ["rating", "title", "year", "runtime"];
+  const [activeBtn, setActiveBtn] = useState("rating");
 
   return (
     <div>
