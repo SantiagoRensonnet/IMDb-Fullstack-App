@@ -4,12 +4,23 @@
 
 @layer components {
   .btn {
-    @apply px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:bg-gray-800 dark:text-gray-300;
+    @apply grow-[2] px-5 py-2 text-sm font-medium text-gray-600 transition-colors duration-200  dark:bg-gray-800 dark:text-gray-300;
   }
   .btn-primary {
     @apply bg-gray-100;
   }
   .btn-secondary {
     @apply hover:bg-gray-100;
+  }
+
+  /*Table*/
+  .table-header {
+    @apply py-3.5  text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400;
+  }
+  .table-data {
+    @apply text-sm font-medium;
+  }
+  .pill {
+    @apply inline px-3 py-1 text-sm font-normal rounded-full  gap-x-2 bg-stone-50;
   }
 }
