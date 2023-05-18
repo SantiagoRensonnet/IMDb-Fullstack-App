@@ -1,7 +1,10 @@
+//libs
 import { HiStar } from "react-icons/hi";
+//components
 import { MovieData } from "../../types";
 import { GenrePills } from "./GenrePills/GenrePills.component";
 import { MoviePoster } from "./MoviePoster.component";
+
 export const TableRow = ({
   id,
   title,
@@ -11,6 +14,7 @@ export const TableRow = ({
   runtime,
 }: MovieData) => {
   const imDbUrl = `https://www.imdb.com/title/${id}`;
+
   return (
     <tr className="h-28">
       <td className="table-data">

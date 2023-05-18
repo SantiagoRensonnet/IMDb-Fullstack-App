@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext } from "react";
 import { MovieFetchData, MovieData, queryParamObject } from "../types";
 import axios from "axios";
-
+import useSWR from "swr";
 //store(context)
 export const MoviesContext = createContext({});
 
@@ -15,36 +15,34 @@ export const MoviesProvider = ({
     sortBy: "rating",
     sortOrder: "desc",
   });
+  const urlWithProxy =
+    "/movies?" + `sort_by=${queryParams.sortOrder}(${queryParams.sortBy})`;
+  const { data, error, isLoading } = useSWR(urlWithProxy, (url: string) =>
+    axios.get(url).then((res) => res.data)
+  );
+
   useEffect(() => {
-    const getData = async () => {
-      const urlWithProxy =
-        "/movies?" + `sort_by=${queryParams.sortOrder}(${queryParams.sortBy})`;
-      try {
-        const response = await axios.get(urlWithProxy);
-        const rawDataArray: MovieFetchData[] = response.data.result;
+    if (!isLoading) {
+      const rawDataArray: MovieFetchData[] = data.result;
+      const formattedData =
+        rawDataArray.length > 0
+          ? rawDataArray.map((rawData) => ({
+              id: rawData.tconst,
+              rating: rawData.averageRating,
+              genres: rawData.genres,
+              title: rawData.primaryTitle,
+              runtime: rawData.runtimeMinutes,
+              year: rawData.startYear,
+            }))
+          : [];
 
-        const formattedData =
-          rawDataArray.length > 0
-            ? rawDataArray.map((rawData) => ({
-                id: rawData.tconst,
-                rating: rawData.averageRating,
-                genres: rawData.genres,
-                title: rawData.primaryTitle,
-                runtime: rawData.runtimeMinutes,
-                year: rawData.startYear,
-              }))
-            : [];
-
-        setMovies(formattedData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getData();
-  }, [queryParams]);
+      setMovies(formattedData);
+    }
+  }, [data]);
   return (
-    <MoviesContext.Provider value={{ movies, queryParams, setQueryParams }}>
+    <MoviesContext.Provider
+      value={{ movies, queryParams, setQueryParams, isLoading }}
+    >
       {children}
     </MoviesContext.Provider>
   );

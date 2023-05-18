@@ -30,6 +30,7 @@ export type MoviesContextType = {
   movies: Array<MovieData>;
   queryParams: queryParamObject;
   setQueryParams: React.Dispatch<React.SetStateAction<queryParamObject>>;
+  isLoading: boolean;
 };
 export enum genreEnum {
   "",
