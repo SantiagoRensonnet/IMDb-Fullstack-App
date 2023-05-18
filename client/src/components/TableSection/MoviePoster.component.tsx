@@ -39,6 +39,6 @@ export const MoviePoster = ({
       alt={`${movieTitle}-poster`}
     />
   ) : (
-    <Skeleton containerClassName="flex-1" />
+    <Skeleton width={64} height={96} containerClassName="flex-1" />
   );
 };

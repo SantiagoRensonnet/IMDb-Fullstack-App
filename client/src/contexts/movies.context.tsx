@@ -5,6 +5,14 @@ import useSWR from "swr";
 //store(context)
 export const MoviesContext = createContext({});
 
+const getQueryURL = (params: queryParamObject) => {
+  //base list url
+  let url = "/movies?" + `sort_by=${params.sortOrder}(${params.sortBy})`;
+  if (params.genre) url += `&genre=${params.genre}`;
+
+  return url;
+};
+
 export const MoviesProvider = ({
   children,
 }: {
@@ -15,9 +23,8 @@ export const MoviesProvider = ({
     sortBy: "rating",
     sortOrder: "desc",
   });
-  const urlWithProxy =
-    "/movies?" + `sort_by=${queryParams.sortOrder}(${queryParams.sortBy})`;
-  const { data, error, isLoading } = useSWR(urlWithProxy, (url: string) =>
+  const queryURL = getQueryURL(queryParams);
+  const { data, error, isLoading } = useSWR(queryURL, (url: string) =>
     axios.get(url).then((res) => res.data)
   );
 

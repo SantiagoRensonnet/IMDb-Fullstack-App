@@ -25,6 +25,8 @@ export type MovieData = {
 export type queryParamObject = {
   sortBy: string;
   sortOrder: "asc" | "desc";
+  genre?: string;
+  title?: string;
 };
 export type MoviesContextType = {
   movies: Array<MovieData>;
