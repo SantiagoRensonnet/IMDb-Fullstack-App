@@ -13,6 +13,24 @@ export type MovieFetchData = {
   tconst: string;
   titleType: string;
 };
+export type MovieData = {
+  id: string;
+  rating: number;
+  genres: string[];
+  title: string;
+  runtime: number;
+  year: number;
+};
+
+export type queryParamObject = {
+  sortBy: string;
+  sortOrder: "asc" | "desc";
+};
+export type MoviesContextType = {
+  movies: Array<MovieData>;
+  queryParams: queryParamObject;
+  setQueryParams: React.Dispatch<React.SetStateAction<queryParamObject>>;
+};
 export enum genreEnum {
   "",
   "Action",

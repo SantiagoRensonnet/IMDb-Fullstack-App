@@ -53,7 +53,7 @@ export const getSortingProperties = (query: QueryString.ParsedQs): Sort => {
 };
 /******************************************************************* */
 export const getPaginationProperties = (query: QueryString.ParsedQs) => {
-  const paginationProps = { page: 1, limit: 5 }; //default values
+  const paginationProps = { page: 1, limit: 10 }; //default values
   if (typeof query.page === "string") {
     paginationProps.page = parseInt(query.page);
   }
@@ -80,7 +80,7 @@ export const convertToFilter = (query: QueryString.ParsedQs) => {
     startYear: { $lte: 2023 },
     primaryTitle: { $regex: /^[\x00-\x7F]*$/ }, //Exclude ASCII extended characters
     originalTitle: { $regex: /^[\x00-\x7F]*$/ },
-    numVotes: { $gt: 10000 },
+    numVotes: { $gt: 50000 },
   };
   if (typeof query.genre === "string") {
     filter.genres = { $in: [query.genre] };

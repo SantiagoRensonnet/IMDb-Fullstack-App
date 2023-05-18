@@ -1,25 +1,26 @@
 import { HiStar } from "react-icons/hi";
-import { MovieFetchData } from "../types";
+import { MovieData } from "../../types";
 import { GenrePills } from "./GenrePills/GenrePills.component";
-export const TableRow = (props: MovieFetchData) => {
-  const {
-    primaryTitle: title,
-    averageRating: rating,
-    runtimeMinutes: runtime,
-    startYear: year,
-    genres,
-  } = props;
-
+import { MoviePoster } from "./MoviePoster.component";
+export const TableRow = ({
+  id,
+  title,
+  genres,
+  year,
+  rating,
+  runtime,
+}: MovieData) => {
+  const imDbUrl = `https://www.imdb.com/title/${id}`;
   return (
-    <tr>
+    <tr className="h-28">
       <td className="table-data">
-        <button className="px-2 py-2 w-16 rounded">
-          <img
-            className="rounded"
-            src="https://image.tmdb.org/t/p/original/sdEOH0992YZ0QSxgXNIGLq1ToUi.jpg"
-            alt="movie-poster"
-          />
-        </button>
+        <a
+          className="h-28 px-2 py-2 flex flex-col items-center rounded"
+          href={imDbUrl}
+          target="_blank"
+        >
+          <MoviePoster movieTitle={title} id={id} />
+        </a>
       </td>
       <td className="table-data">
         <div>

@@ -6,7 +6,7 @@ export const TableTitle = () => {
           Movies
         </h1>
         <span className="px-3 py-1 text-xs  text-[hsl(210,83%,53%)]  bg-[hsl(203,95%,93%)] rounded-full dark:bg-gray-800 dark:text-blue-400">
-          Top 5
+          Top 10
         </span>
       </div>
     </article>

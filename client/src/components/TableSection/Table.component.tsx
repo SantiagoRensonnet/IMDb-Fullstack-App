@@ -1,9 +1,15 @@
+//libs
+import { useContext } from "react";
 //types
-import { MovieFetchData } from "../types";
+import { MoviesContextType } from "../../types";
+//contexts
+import { MoviesContext } from "../../contexts/movies.context";
 //components
 import { TableRow } from "./TableRow.component";
 
-export const Table = ({ movies }: { movies: MovieFetchData[] }) => {
+export const Table = () => {
+  const { movies } = useContext(MoviesContext) as MoviesContextType;
+
   return (
     <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -36,9 +42,11 @@ export const Table = ({ movies }: { movies: MovieFetchData[] }) => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-              {movies.map((movie) => (
-                <TableRow key={movie._id} {...movie} />
-              ))}
+              {movies ? (
+                movies.map((movie) => <TableRow key={movie.id} {...movie} />)
+              ) : (
+                <h1>Loading...</h1>
+              )}
             </tbody>
           </table>
         </div>

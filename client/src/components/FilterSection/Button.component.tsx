@@ -5,7 +5,7 @@ export const Button = ({
 }: {
   sortProp: string;
   isActive: boolean;
-  setActiveBtn: React.Dispatch<React.SetStateAction<string>>;
+  setActiveBtn: (sortProp: string) => void;
 }) => {
   return (
     <button
