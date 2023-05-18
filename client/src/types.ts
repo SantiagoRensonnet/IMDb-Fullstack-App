@@ -21,9 +21,10 @@ export type MovieData = {
   runtime: number;
   year: number;
 };
+export type sortByType = "rating" | "title" | "year" | "runtime";
 
 export type queryParamObject = {
-  sortBy: string;
+  sortBy: sortByType;
   sortOrder: "asc" | "desc";
   genre?: string;
   title?: string;

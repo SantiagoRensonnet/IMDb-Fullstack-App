@@ -2,19 +2,21 @@
 import { useContext, useState } from "react";
 //context
 import { MoviesContext } from "../../contexts/movies.context";
+//Types
 import { MoviesContextType } from "../../types";
+import { sortByType } from "../../types";
 //components
 import { Button } from "./Button.component";
 import { SortOrderButton } from "./SortOrderButton.component";
 
 export const ButtonArray = () => {
-  const sortProperties = ["rating", "title", "year", "runtime"];
+  const sortProperties: sortByType[] = ["rating", "title", "year", "runtime"];
   const { queryParams, setQueryParams } = useContext(
     MoviesContext
   ) as MoviesContextType;
   const [activeBtn, setActiveBtn] = useState(queryParams.sortBy);
   //Event Handlers
-  const handleSortChange = (sortProp: string) => {
+  const handleSortChange = (sortProp: sortByType) => {
     setActiveBtn(sortProp);
     setQueryParams((prevState) => ({ ...prevState, sortBy: sortProp }));
   };

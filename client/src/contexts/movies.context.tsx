@@ -29,7 +29,7 @@ export const MoviesProvider = ({
   );
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && data) {
       const rawDataArray: MovieFetchData[] = data.result;
       const formattedData =
         rawDataArray.length > 0
@@ -45,7 +45,7 @@ export const MoviesProvider = ({
 
       setMovies(formattedData);
     }
-  }, [data]);
+  }, [data, isLoading]);
   return (
     <MoviesContext.Provider
       value={{ movies, queryParams, setQueryParams, isLoading }}

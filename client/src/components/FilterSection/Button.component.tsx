@@ -1,11 +1,12 @@
+import { sortByType } from "../../types";
 export const Button = ({
   sortProp,
   isActive,
   setActiveBtn,
 }: {
-  sortProp: string;
+  sortProp: sortByType;
   isActive: boolean;
-  setActiveBtn: (sortProp: string) => void;
+  setActiveBtn: (sortProp: sortByType) => void;
 }) => {
   return (
     <button
