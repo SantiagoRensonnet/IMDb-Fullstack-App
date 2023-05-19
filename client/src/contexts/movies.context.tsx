@@ -23,6 +23,7 @@ export const MoviesProvider = ({
     sortBy: "rating",
     sortOrder: "desc",
   });
+
   const queryURL = getQueryURL(queryParams);
   const { data, error, isLoading } = useSWR(queryURL, (url: string) =>
     axios.get(url).then((res) => res.data)

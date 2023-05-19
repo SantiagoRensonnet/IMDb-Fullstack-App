@@ -3,6 +3,7 @@ import { TableTitle } from "../TableSection/TableTitle.component";
 import { ButtonArray } from "./ButtonArray.component";
 import { GenreSelect } from "./GenreSelect.component";
 import { SearchBar } from "./SearchBar.component";
+import { InputRange } from "./InputRange.component";
 
 export const FilterSection = () => {
   return (
@@ -10,8 +11,12 @@ export const FilterSection = () => {
       <section>
         <TableTitle />
         <ButtonArray />
+        <article className="mt-2 px-1 flex flex-wrap justify-between">
+          <InputRange rangeCategory="runtime" />
+          <InputRange rangeCategory="rating" />
+        </article>
       </section>
-      <section className="sm:flex sm:flex-col sm:justify-end sm:gap-y-2">
+      <section className="sm:flex sm:flex-col sm:justify-start sm:gap-y-2">
         <GenreSelect />
         <SearchBar />
       </section>
