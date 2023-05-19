@@ -28,6 +28,7 @@ export type queryParamObject = {
   sortBy: sortByType;
   sortOrder: "asc" | "desc";
   page: number;
+  limit: 10 | 100 | 250;
   genre?: string;
   title?: string;
   rating?: number;

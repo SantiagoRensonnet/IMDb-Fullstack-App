@@ -7,7 +7,7 @@ import { InputRange } from "./InputRange.component";
 
 export const FilterSection = () => {
   return (
-    <section className="container sm:grid sm:grid-cols-2 sm:gap-4 px-4">
+    <section className="container mt-4 sm:grid sm:grid-cols-2 sm:gap-4 px-4">
       <section>
         <TableTitle />
         <ButtonArray />

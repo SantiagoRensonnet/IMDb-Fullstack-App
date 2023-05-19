@@ -16,7 +16,7 @@ import { MoviesContext } from "./movies.context";
 const getQueryURL = (params: queryParamObject) => {
   //base list url
   let url =
-    `/movies?page=${params.page}` +
+    `/movies?page=${params.page}&limit=${params.limit}` +
     `&sort_by=${params.sortOrder}(${params.sortBy})`;
   if (params.genre) url += `&genre=${params.genre}`;
   if (params.runtime) url += `&runtime[lte]=${params.runtime}`;
@@ -36,6 +36,7 @@ export const QueryProvider = ({
     sortBy: "rating",
     sortOrder: "desc",
     page: 1,
+    limit: 10,
   });
   const [paginationProps, setPaginationProps] = useState<paginationProps>({});
   const queryURL = getQueryURL(queryParams);
