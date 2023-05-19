@@ -28,9 +28,7 @@ export const TableRow = ({
       </td>
       <td className="table-data">
         <div>
-          <h2 className="font-medium text-gray-800 dark:text-white ">
-            {title}
-          </h2>
+          <h2 className="font-medium text-gray-800">{title}</h2>
         </div>
       </td>
       <td className="table-data">
@@ -38,7 +36,7 @@ export const TableRow = ({
       </td>
       <td className="table-data">
         <div>
-          <h4 className="text-gray-700 dark:text-gray-200">{year}</h4>
+          <h4 className="text-gray-700">{year}</h4>
         </div>
       </td>
       <td className="table-data">

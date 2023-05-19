@@ -10,7 +10,7 @@ export const RowLoader = () => {
       </td>
       <td className="table-data">
         <div>
-          <h2 className="font-medium text-gray-800 dark:text-white ">
+          <h2 className="font-medium text-gray-800">
             <Skeleton width={180} />
           </h2>
         </div>
@@ -20,7 +20,7 @@ export const RowLoader = () => {
       </td>
       <td className="table-data">
         <div>
-          <h4 className="text-gray-700 dark:text-gray-200">
+          <h4 className="text-gray-700">
             <Skeleton width={30} />
           </h4>
         </div>

@@ -17,7 +17,7 @@ export const SearchBar = () => {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="w-5 h-5 mx-3 text-gray-400 dark:text-gray-600"
+          className="w-5 h-5 mx-3 text-gray-400"
         >
           <path
             strokeLinecap="round"
@@ -30,7 +30,7 @@ export const SearchBar = () => {
       <input
         type="text"
         placeholder="Search Title"
-        className="flex-1 py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
+        className="flex-1 py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 focus:border-blue-400 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
         value={inputValue}
         onChange={(e) => {
           setInputValue(e.target.value);
