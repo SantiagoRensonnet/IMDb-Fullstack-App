@@ -8,8 +8,16 @@ import { MoviesContext } from "../../contexts/movies.context";
 import { TableRow } from "./TableRow.component";
 
 export const Table = () => {
-  const { movies } = useContext(MoviesContext) as MoviesContextType;
-
+  const { movies, filterByTitleTerm } = useContext(
+    MoviesContext
+  ) as MoviesContextType;
+  const filteredMovies = filterByTitleTerm
+    ? movies.filter((movie) =>
+        movie.title
+          .toLocaleLowerCase()
+          .includes(filterByTitleTerm.toLocaleLowerCase())
+      )
+    : movies;
   return (
     <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -42,7 +50,7 @@ export const Table = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {movies?.map((movie) => (
+              {filteredMovies?.map((movie) => (
                 <TableRow key={movie.id} {...movie} />
               ))}
             </tbody>

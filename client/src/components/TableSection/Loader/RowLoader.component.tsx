@@ -10,9 +10,9 @@ export const RowLoader = () => {
       </td>
       <td className="table-data">
         <div>
-          <h2 className="font-medium text-gray-800">
-            <Skeleton width={180} />
-          </h2>
+          <h3 className="font-medium text-gray-800">
+            <Skeleton width={190} />
+          </h3>
         </div>
       </td>
       <td className="table-data">

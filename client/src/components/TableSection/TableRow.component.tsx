@@ -27,8 +27,11 @@ export const TableRow = ({
         </a>
       </td>
       <td className="table-data">
-        <div>
-          <h2 className="font-medium text-gray-800">{title}</h2>
+        <div className="flex">
+          <h2 className="font-semibold text-gray-800 mr-1">{`${
+            title.split(".")[0]
+          }.`}</h2>
+          <h3 className="font-medium text-gray-800">{title.split(".")[1]}</h3>
         </div>
       </td>
       <td className="table-data">

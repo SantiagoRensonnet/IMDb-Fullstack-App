@@ -10,9 +10,11 @@ export const MoviesProvider = ({
   children: JSX.Element | JSX.Element[];
 }) => {
   const [movies, setMovies] = useState<Array<MovieData>>([]);
-
+  const [filterByTitleTerm, setFilterByTitleTerm] = useState("");
   return (
-    <MoviesContext.Provider value={{ movies, setMovies }}>
+    <MoviesContext.Provider
+      value={{ movies, setMovies, filterByTitleTerm, setFilterByTitleTerm }}
+    >
       {children}
     </MoviesContext.Provider>
   );

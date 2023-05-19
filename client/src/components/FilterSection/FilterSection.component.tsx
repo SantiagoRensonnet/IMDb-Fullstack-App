@@ -1,5 +1,5 @@
 //components
-import { TableTitle } from "../TableSection/TableTitle.component";
+import { TableTitle } from "./TableTitle.component";
 import { ButtonArray } from "./ButtonArray.component";
 import { GenreSelect } from "./GenreSelect.component";
 import { SearchBar } from "./SearchBar.component";

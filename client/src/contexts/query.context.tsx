@@ -55,11 +55,13 @@ export const QueryProvider = ({
       const rawDataArray: MovieFetchData[] = data.result;
       const formattedData =
         rawDataArray.length > 0
-          ? rawDataArray.map((rawData) => ({
+          ? rawDataArray.map((rawData, index) => ({
               id: rawData.tconst,
               rating: rawData.averageRating,
               genres: rawData.genres,
-              title: rawData.primaryTitle,
+              title: `${index + 1 + (data.currentPage - 1) * data.limit}. ${
+                rawData.primaryTitle
+              }`,
               runtime: rawData.runtimeMinutes,
               year: rawData.startYear,
             }))
