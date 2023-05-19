@@ -18,7 +18,11 @@ export const ButtonArray = () => {
   //Event Handlers
   const handleSortChange = (sortProp: sortByType) => {
     setActiveBtn(sortProp);
-    setQueryParams((prevState) => ({ ...prevState, sortBy: sortProp }));
+    setQueryParams((prevState) => ({
+      ...prevState,
+      sortBy: sortProp,
+      page: 1,
+    }));
   };
   return (
     <div>

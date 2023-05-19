@@ -27,14 +27,22 @@ export type rangeCategoryType = "rating" | "runtime";
 export type queryParamObject = {
   sortBy: sortByType;
   sortOrder: "asc" | "desc";
+  page: number;
   genre?: string;
   title?: string;
   rating?: number;
   runtime?: number;
 };
+export type paginationProps = {
+  limit?: number;
+  prevPage?: number | null;
+  currentPage?: number;
+  nextPage?: number | null;
+};
 export type QueryContextType = {
   queryParams: queryParamObject;
   setQueryParams: React.Dispatch<React.SetStateAction<queryParamObject>>;
+  paginationProps: paginationProps;
   isLoading: boolean;
 };
 export type MoviesContextType = {

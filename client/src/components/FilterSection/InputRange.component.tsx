@@ -26,10 +26,10 @@ export const InputRange = ({
       setQueryParams((prevQuery) => {
         switch (rangeCategory) {
           case "rating":
-            return { ...prevQuery, rating: inputValue };
+            return { ...prevQuery, rating: inputValue, page: 1 };
 
           case "runtime":
-            return { ...prevQuery, runtime: inputValue };
+            return { ...prevQuery, runtime: inputValue, page: 1 };
         }
       });
     }

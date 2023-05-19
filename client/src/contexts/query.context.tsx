@@ -5,9 +5,9 @@ import useSWR from "swr";
 //types
 import {
   MovieFetchData,
-  MovieData,
   MoviesContextType,
   queryParamObject,
+  paginationProps,
 } from "../types";
 //contexts
 import { MoviesContext } from "./movies.context";
@@ -15,7 +15,9 @@ import { MoviesContext } from "./movies.context";
 //Aux functions
 const getQueryURL = (params: queryParamObject) => {
   //base list url
-  let url = "/movies?" + `sort_by=${params.sortOrder}(${params.sortBy})`;
+  let url =
+    `/movies?page=${params.page}` +
+    `&sort_by=${params.sortOrder}(${params.sortBy})`;
   if (params.genre) url += `&genre=${params.genre}`;
   if (params.runtime) url += `&runtime[lte]=${params.runtime}`;
   if (params.rating) url += `&rating[gt]=${params.rating}`;
@@ -33,8 +35,9 @@ export const QueryProvider = ({
   const [queryParams, setQueryParams] = useState<queryParamObject>({
     sortBy: "rating",
     sortOrder: "desc",
+    page: 1,
   });
-
+  const [paginationProps, setPaginationProps] = useState<paginationProps>({});
   const queryURL = getQueryURL(queryParams);
   const { data, error, isLoading } = useSWR(queryURL, (url: string) =>
     axios.get(url).then((res) => res.data)
@@ -42,6 +45,12 @@ export const QueryProvider = ({
 
   useEffect(() => {
     if (!isLoading && data) {
+      const paginationResults: paginationProps = {
+        limit: data.limit,
+        prevPage: data.previousPage,
+        currentPage: data.currentPage,
+        nextPage: data.nextPage,
+      };
       const rawDataArray: MovieFetchData[] = data.result;
       const formattedData =
         rawDataArray.length > 0
@@ -56,11 +65,14 @@ export const QueryProvider = ({
           : [];
 
       setMovies(formattedData);
+      setPaginationProps(paginationResults);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isLoading]);
   return (
-    <QueryContext.Provider value={{ queryParams, setQueryParams, isLoading }}>
+    <QueryContext.Provider
+      value={{ queryParams, setQueryParams, paginationProps, isLoading }}
+    >
       {children}
     </QueryContext.Provider>
   );

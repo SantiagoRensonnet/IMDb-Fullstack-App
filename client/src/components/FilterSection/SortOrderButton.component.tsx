@@ -18,6 +18,7 @@ export const SortOrderButton = () => {
     setQueryParams((prevState) => ({
       ...prevState,
       sortOrder: toggleOrder(prevState.sortOrder),
+      page: 1,
     }));
   };
   return (

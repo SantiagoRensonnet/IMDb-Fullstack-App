@@ -52,7 +52,11 @@ export const GenreSelect = () => {
         onChange={(e) => {
           const newGenre = e.target.value;
           setSelectedGenre(newGenre);
-          setQueryParams((prevState) => ({ ...prevState, genre: newGenre }));
+          setQueryParams((prevState) => ({
+            ...prevState,
+            genre: newGenre,
+            page: 1,
+          }));
         }}
       >
         <option disabled value="">
