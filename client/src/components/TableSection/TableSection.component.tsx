@@ -13,7 +13,7 @@ export const TableSection = () => {
   const limit = 10;
   const { isLoading } = useContext(QueryContext) as QueryContextType;
   return (
-    <section className="container flex flex-col px-4 mb-4">
+    <section className="container flex flex-col px-7 sm:px-4 mb-4">
       {!isLoading ? <Table /> : <TableLoader limit={limit} />}
     </section>
   );

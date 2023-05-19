@@ -3,6 +3,7 @@ import axios from "axios";
 import useSWR from "swr";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useResize } from "../../hooks/useResize.hook";
 export const MoviePoster = ({
   id,
   movieTitle,
@@ -10,6 +11,7 @@ export const MoviePoster = ({
   id: string;
   movieTitle: string;
 }) => {
+  const isMobile = useResize();
   const [posterPath, setPosterPath] = useState("");
   const findIMDbMovieEndpoint = `https://api.themoviedb.org/3/find/${id}?api_key=d76c5df85f84510c22bbc25e156327ce&external_source=imdb_id`;
   const {
@@ -39,6 +41,10 @@ export const MoviePoster = ({
       alt={`${movieTitle}-poster`}
     />
   ) : (
-    <Skeleton width={64} height={96} containerClassName="flex-1" />
+    <Skeleton
+      width={isMobile ? 25 : 64}
+      height={96}
+      containerClassName="flex-1"
+    />
   );
 };

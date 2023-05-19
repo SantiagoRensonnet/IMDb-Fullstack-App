@@ -1,5 +1,6 @@
 //libs
 import { HiStar } from "react-icons/hi";
+
 //components
 import { MovieData } from "../../types";
 import { GenrePills } from "./GenrePills/GenrePills.component";
@@ -26,6 +27,7 @@ export const TableRow = ({
           <MoviePoster movieTitle={title} id={id} />
         </a>
       </td>
+
       <td className="table-data">
         <div className="flex">
           <h2 className="font-semibold text-gray-800 mr-1">{`${
@@ -34,6 +36,7 @@ export const TableRow = ({
           <h3 className="font-medium text-gray-800">{title.split(".")[1]}</h3>
         </div>
       </td>
+
       <td className="table-data">
         <GenrePills genres={genres} />
       </td>
@@ -49,7 +52,7 @@ export const TableRow = ({
         </div>
       </td>
 
-      <td className="table-data">{runtime} minutes</td>
+      <td className="table-data text-center sm:text-left">{runtime} minutes</td>
     </tr>
   );
 };

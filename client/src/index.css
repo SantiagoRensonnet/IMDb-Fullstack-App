@@ -21,7 +21,7 @@
     @apply text-sm font-medium;
   }
   .pill {
-    @apply inline px-3 py-1 text-sm font-normal rounded-full  gap-x-2 bg-stone-50;
+    @apply inline text-center px-1 sm:px-3 py-1 text-sm font-normal rounded-full  gap-x-2 bg-stone-50;
   }
   /*Pagination*/
   .pagination-btn {

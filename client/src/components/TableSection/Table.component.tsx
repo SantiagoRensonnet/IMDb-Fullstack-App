@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { MoviesContextType } from "../../types";
 //contexts
 import { MoviesContext } from "../../contexts/movies.context";
+
 //components
 import { TableRow } from "./TableRow.component";
 
@@ -28,6 +29,7 @@ export const Table = () => {
                 <th scope="col" className="table-header">
                   <span className="sr-only">Poster</span>
                 </th>
+
                 <th scope="col" className="table-header">
                   Title
                 </th>

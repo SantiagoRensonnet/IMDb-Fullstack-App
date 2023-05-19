@@ -7,7 +7,7 @@ import { rangeCategoryType } from "../../types";
 //contexts
 import { QueryContext } from "../../contexts/query.context";
 //hooks
-import { useDebounce } from "../../hooks/UseDebounce";
+import { useDebounce } from "../../hooks/useDebounce.hook";
 
 export const InputRange = ({
   rangeCategory,

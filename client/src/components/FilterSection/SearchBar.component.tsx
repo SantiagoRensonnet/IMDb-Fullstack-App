@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useDebounce } from "../../hooks/UseDebounce";
+import { useDebounce } from "../../hooks/useDebounce.hook";
 import { MoviesContext } from "../../contexts/movies.context";
 import { MoviesContextType } from "../../types";
 
