@@ -1,13 +1,15 @@
 //libs
 import { useState, useContext } from "react";
 import { HiSortAscending, HiSortDescending } from "react-icons/hi";
+//types
+import { QueryContextType } from "../../types";
 //context
-import { MoviesContext } from "../../contexts/movies.context";
-import { MoviesContextType } from "../../types";
+import { QueryContext } from "../../contexts/query.context";
+
 export const SortOrderButton = () => {
   const { queryParams, setQueryParams } = useContext(
-    MoviesContext
-  ) as MoviesContextType;
+    QueryContext
+  ) as QueryContextType;
   const [btnOrder, setBtnOrder] = useState(queryParams.sortOrder);
 
   const toggleOrder = (order: string) => (order === "desc" ? "asc" : "desc");

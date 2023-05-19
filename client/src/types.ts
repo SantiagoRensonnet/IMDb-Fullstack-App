@@ -22,18 +22,24 @@ export type MovieData = {
   year: number;
 };
 export type sortByType = "rating" | "title" | "year" | "runtime";
+export type rangeCategoryType = "rating" | "runtime";
 
 export type queryParamObject = {
   sortBy: sortByType;
   sortOrder: "asc" | "desc";
   genre?: string;
   title?: string;
+  rating?: number;
+  runtime?: number;
 };
-export type MoviesContextType = {
-  movies: Array<MovieData>;
+export type QueryContextType = {
   queryParams: queryParamObject;
   setQueryParams: React.Dispatch<React.SetStateAction<queryParamObject>>;
   isLoading: boolean;
+};
+export type MoviesContextType = {
+  movies: Array<MovieData>;
+  setMovies: React.Dispatch<React.SetStateAction<Array<MovieData>>>;
 };
 export enum genreEnum {
   "",

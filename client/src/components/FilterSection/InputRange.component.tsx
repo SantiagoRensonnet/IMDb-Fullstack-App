@@ -1,16 +1,38 @@
+//libs
 import * as Slider from "@radix-ui/react-slider";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+//types
+import { QueryContextType } from "../../types";
+import { rangeCategoryType } from "../../types";
+//contexts
+import { QueryContext } from "../../contexts/query.context";
+//hooks
 import { useDebounce } from "../../hooks/UseDebounce";
-export const InputRange = ({ rangeCategory }: { rangeCategory: string }) => {
+
+export const InputRange = ({
+  rangeCategory,
+}: {
+  rangeCategory: rangeCategoryType;
+}) => {
   const [inputValue, setInputValue] = useState(
     rangeCategory === "rating" ? 6 : 90
   );
   const [inputTouched, setInputTouched] = useState(false);
   const categoryRange = useDebounce(inputValue);
+  const { setQueryParams } = useContext(QueryContext) as QueryContextType;
 
   useEffect(() => {
-    inputTouched && console.log(`update ${rangeCategory} to ${inputValue}`);
-    //Llamar aca a context y rangeCategory con inputValue
+    if (inputTouched) {
+      setQueryParams((prevQuery) => {
+        switch (rangeCategory) {
+          case "rating":
+            return { ...prevQuery, rating: inputValue };
+
+          case "runtime":
+            return { ...prevQuery, runtime: inputValue };
+        }
+      });
+    }
   }, [categoryRange]);
   return (
     <div>

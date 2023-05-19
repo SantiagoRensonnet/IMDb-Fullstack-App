@@ -1,8 +1,10 @@
 //libs
+//libs
 import { useState, useContext } from "react";
+//types
+import { QueryContextType } from "../../types";
 //contexts
-import { MoviesContext } from "../../contexts/movies.context";
-import { MoviesContextType } from "../../types";
+import { QueryContext } from "../../contexts/query.context";
 
 export const GenreSelect = () => {
   const genres = [
@@ -36,8 +38,8 @@ export const GenreSelect = () => {
     "Western",
   ];
   const { queryParams, setQueryParams } = useContext(
-    MoviesContext
-  ) as MoviesContextType;
+    QueryContext
+  ) as QueryContextType;
   const defaultValue = queryParams.genre || "";
   const [selectedGenre, setSelectedGenre] = useState(defaultValue);
   return (
