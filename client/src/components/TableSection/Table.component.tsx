@@ -1,5 +1,6 @@
 //libs
 import { useContext } from "react";
+
 //types
 import { MoviesContextType } from "../../types";
 //contexts
